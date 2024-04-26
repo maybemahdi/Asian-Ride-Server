@@ -56,8 +56,6 @@ async function run() {
           season: updatedSpot.season,
           time: updatedSpot.time,
           visitors: updatedSpot.visitors,
-          email: updatedSpot.email,
-          name: updatedSpot.name,
         },
       };
       const result = await allSpotCollection.updateOne(
