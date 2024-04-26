@@ -24,10 +24,17 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
-
-
-    
-
+    const allSpotCollection = client.db("allSpot").collection("spots");
+    app.get("/allspot", async (req, res) => {
+      const cursor = allSpotCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.post("/allspot", async (req, res) => {
+      const spot = req.body;
+      const result = await allSpotCollection.insertOne(spot);
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     // await client.db("admin").command({ ping: 1 });
     console.log(
@@ -41,9 +48,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Coffee maker app is running");
+  res.send("Asian Ride is running");
 });
 
 app.listen(port, () => {
-  console.log(`Coffee server is running on port ${port}`);
+  console.log(`Asian Ride server is running on port ${port}`);
 });
