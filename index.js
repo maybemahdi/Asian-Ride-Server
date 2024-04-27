@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+// const countries = require("./country.json");
 const app = express();
 const port = process.env.PORT || 5000;
 require("dotenv").config();
@@ -25,6 +26,15 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     const allSpotCollection = client.db("allSpot").collection("spots");
+    const allCountryCollection = client.db("allSpot").collection("countries");
+
+    // crud for country
+    app.get("/countries", async(req, res) => {
+      const cursor = allCountryCollection.find();
+      const result = await cursor.toArray();
+      res.send(result)
+    })
+    //crud for spots
     app.get("/allspot", async (req, res) => {
       const cursor = allSpotCollection.find();
       const result = await cursor.toArray();
@@ -87,6 +97,9 @@ run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("Asian Ride is running");
 });
+// app.get("/countries", (req, res) => {
+//   res.send(countries);
+// });
 
 app.listen(port, () => {
   console.log(`Asian Ride server is running on port ${port}`);
