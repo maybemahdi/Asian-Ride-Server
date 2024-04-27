@@ -97,9 +97,6 @@ run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("Asian Ride is running");
 });
-// app.get("/countries", (req, res) => {
-//   res.send(countries);
-// });
 
 app.listen(port, () => {
   console.log(`Asian Ride server is running on port ${port}`);
